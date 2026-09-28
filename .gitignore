@@ -1,0 +1,39 @@
+# RAW DATA (personal contact data) - NEVER UPLOAD
+# The originals stay local in Data/; only the anonymised data_public/ is tracked.
+/Data/
+/data_cache/
+/Archive/
+*.xlsx
+*.xls
+*.rds
+*.RData
+*.csv
+!data_public/submissions.csv
+
+# R specific
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+rsconnect/
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+~$*
+
+# Sensitive information
+*.env
+.Renviron
+credentials/
+
+# Claude Code setup (local-only tooling)
+.claude/
+CLAUDE.md
+MEMORY.md
+dev_logs/
+templates/
+explorations/
