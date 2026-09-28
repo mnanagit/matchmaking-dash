@@ -28,6 +28,7 @@ export_sheet <- function(d, actor) {
 output$download_xlsx <- downloadHandler(
   filename = function() sprintf("matchmaking_%s.xlsx", format(Sys.Date(), "%Y-%m-%d")),
   content = function(file) {
+    req(authed())
     subs <- filtered_subs()
     shown <- if (length(input$f_actor) == 0) ACTOR_TYPES else input$f_actor
     filters <- data.frame(

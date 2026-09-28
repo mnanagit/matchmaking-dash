@@ -99,6 +99,34 @@
         "Archs": "x64"
       }
     },
+    "askpass": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "description": {
+        "Package": "askpass",
+        "Type": "Package",
+        "Title": "Password Entry Utilities for R, Git, and SSH",
+        "Version": "1.2.1",
+        "Authors@R": "person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), \n    email = \"jeroenooms@gmail.com\", comment = c(ORCID = \"0000-0002-4035-0289\"))",
+        "Description": "Cross-platform utilities for prompting the user for credentials or a \n    passphrase, for example to authenticate with a server or read a protected key.\n    Includes native programs for MacOS and Windows, hence no 'tcltk' is required. \n    Password entry can be invoked in two different ways: directly from R via the \n    askpass() function, or indirectly as password-entry back-end for 'ssh-agent' \n    or 'git-credential' via the SSH_ASKPASS and GIT_ASKPASS environment variables.\n    Thereby the user can be prompted for credentials or a passphrase if needed \n    when R calls out to git or ssh.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://r-lib.r-universe.dev/askpass",
+        "BugReports": "https://github.com/r-lib/askpass/issues",
+        "Encoding": "UTF-8",
+        "Imports": "sys (>= 2.1)",
+        "RoxygenNote": "7.2.3",
+        "Suggests": "testthat",
+        "Language": "en-US",
+        "NeedsCompilation": "yes",
+        "Packaged": "2024-10-03 14:12:09 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)",
+        "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-10-04 07:20:03 UTC",
+        "Built": "R 4.6.1; x86_64-w64-mingw32; 2026-06-25 01:50:41 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "base64enc": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -349,6 +377,36 @@
         "Repository": "CRAN",
         "Date/Publication": "2025-08-26 23:50:02 UTC",
         "Built": "R 4.6.1; ; 2026-06-25 02:07:55 UTC; windows"
+      }
+    },
+    "curl": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "description": {
+        "Package": "curl",
+        "Type": "Package",
+        "Title": "A Modern and Flexible Web Client for R",
+        "Version": "7.1.0",
+        "Authors@R": "c(\n    person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), email = \"jeroenooms@gmail.com\",\n      comment = c(ORCID = \"0000-0002-4035-0289\")),\n    person(\"Hadley\", \"Wickham\", role = \"ctb\"),\n    person(\"Posit Software, PBC\", role = \"cph\"))",
+        "Description": "Bindings to 'libcurl' <https://curl.se/libcurl/> for performing fully\n    configurable HTTP/FTP requests where responses can be processed in memory, on\n    disk, or streaming via the callback or connection interfaces. Some knowledge\n    of 'libcurl' is recommended; for a more-user-friendly web client see the \n    'httr2' package which builds on this package with http specific tools and logic.",
+        "License": "MIT + file LICENSE",
+        "SystemRequirements": "libcurl (>= 7.73): libcurl-devel (rpm) or\nlibcurl4-openssl-dev (deb)",
+        "URL": "https://jeroen.r-universe.dev/curl",
+        "BugReports": "https://github.com/jeroen/curl/issues",
+        "Suggests": "spelling, testthat (>= 1.0.0), knitr, jsonlite, later,\nrmarkdown, httpuv (>= 1.4.4), webutils",
+        "VignetteBuilder": "knitr",
+        "Depends": "R (>= 3.0.0)",
+        "RoxygenNote": "7.3.2",
+        "Encoding": "UTF-8",
+        "Language": "en-US",
+        "NeedsCompilation": "yes",
+        "Packaged": "2026-04-21 14:47:54 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (ORCID: <https://orcid.org/0000-0002-4035-0289>),\n  Hadley Wickham [ctb],\n  Posit Software, PBC [cph]",
+        "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2026-04-22 09:40:02 UTC",
+        "Built": "R 4.6.0; x86_64-w64-mingw32; 2026-06-20 01:35:55 UTC; windows",
+        "Archs": "x64"
       }
     },
     "digest": {
@@ -989,6 +1047,35 @@
         "Archs": "x64"
       }
     },
+    "openssl": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "description": {
+        "Package": "openssl",
+        "Type": "Package",
+        "Title": "Toolkit for Encryption, Signatures and Certificates Based on\nOpenSSL",
+        "Version": "2.4.2",
+        "Authors@R": "c(person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), email = \"jeroenooms@gmail.com\",\n    comment = c(ORCID = \"0000-0002-4035-0289\")),\n    person(\"Oliver\", \"Keyes\", role = \"ctb\"))",
+        "Description": "Bindings to OpenSSL libssl and libcrypto, plus custom SSH key parsers.\n    Supports RSA, DSA and EC curves P-256, P-384, P-521, and curve25519. Cryptographic\n    signatures can either be created and verified manually or via x509 certificates. \n    AES can be used in cbc, ctr or gcm mode for symmetric encryption; RSA for asymmetric\n    (public key) encryption or EC for Diffie Hellman. High-level envelope functions \n    combine RSA and AES for encrypting arbitrary sized data. Other utilities include key\n    generators, hash functions (md5, sha1, sha256, etc), base64 encoder, a secure random\n    number generator, and 'bignum' math methods for manually performing crypto \n    calculations on large multibyte integers.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://jeroen.r-universe.dev/openssl",
+        "BugReports": "https://github.com/jeroen/openssl/issues",
+        "SystemRequirements": "OpenSSL >= 1.0.2",
+        "VignetteBuilder": "knitr",
+        "Imports": "askpass",
+        "Suggests": "curl, testthat (>= 2.1.0), digest, knitr, rmarkdown,\njsonlite, jose, sodium",
+        "Encoding": "UTF-8",
+        "Config/roxygen2/version": "8.0.0",
+        "NeedsCompilation": "yes",
+        "Packaged": "2026-06-09 10:51:42 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (ORCID: <https://orcid.org/0000-0002-4035-0289>),\n  Oliver Keyes [ctb]",
+        "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2026-06-09 13:30:02 UTC",
+        "Built": "R 4.6.1; x86_64-w64-mingw32; 2026-06-25 02:08:01 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "otel": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -1524,6 +1611,33 @@
         "Built": "R 4.6.1; ; 2026-06-25 02:30:21 UTC; windows"
       }
     },
+    "sys": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "description": {
+        "Package": "sys",
+        "Type": "Package",
+        "Title": "Powerful and Reliable Tools for Running System Commands in R",
+        "Version": "3.4.3",
+        "Authors@R": "c(person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), \n      email = \"jeroenooms@gmail.com\", comment = c(ORCID = \"0000-0002-4035-0289\")),\n    person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = \"ctb\"))",
+        "Description": "Drop-in replacements for the base system2() function with fine control\n    and consistent behavior across platforms. Supports clean interruption, timeout, \n    background tasks, and streaming STDIN / STDOUT / STDERR over binary or text \n    connections. Arguments on Windows automatically get encoded and quoted to work \n    on different locales.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://jeroen.r-universe.dev/sys",
+        "BugReports": "https://github.com/jeroen/sys/issues",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.1.1",
+        "Suggests": "unix (>= 1.4), spelling, testthat",
+        "Language": "en-US",
+        "NeedsCompilation": "yes",
+        "Packaged": "2024-10-03 14:13:17 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>),\n  Gábor Csárdi [ctb]",
+        "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-10-04 09:40:02 UTC",
+        "Built": "R 4.6.1; x86_64-w64-mingw32; 2026-06-25 00:56:15 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "tibble": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -1876,11 +1990,14 @@
     "data_public/submissions.csv": {
       "checksum": "d01a067e53bf8f88b3a53f5d1c5292d6"
     },
+    "modules/data/auth_helpers.R": {
+      "checksum": "92884a1ca9f09d7a68435b829c3c88be"
+    },
     "modules/data/color_palettes.R": {
       "checksum": "3a333b09560a3c6747ee4b3f7217e8d9"
     },
     "modules/data/data_loading.R": {
-      "checksum": "29bb5d33e44d48d6a02aebced558bcaa"
+      "checksum": "eed842a0d6da694f363a9cf824aa0a27"
     },
     "modules/data/filter_helpers.R": {
       "checksum": "2e49455c1efa995323d3fdef22a3de3d"
@@ -1894,20 +2011,26 @@
     "modules/data/shared.R": {
       "checksum": "8684bfed8138403d24e1347421b36a64"
     },
+    "modules/server/auth.R": {
+      "checksum": "c2fb11272e1480f49b37d57ba7de80fc"
+    },
     "modules/server/downloads.R": {
-      "checksum": "44f118301931c15685246df88b819388"
+      "checksum": "1eb56c84bda37d679120ab4b8f0a7869"
     },
     "modules/server/filters.R": {
-      "checksum": "787b41189dbc51f2ec02b46d57b6023c"
+      "checksum": "b2a4eaf6705745f5dfe73de237e88168"
     },
     "modules/server/overview.R": {
-      "checksum": "243fcde7ddc2ea3f2003b1d3bd733557"
+      "checksum": "31ec6f0c68ea56d1551eb376cefc2935"
     },
     "modules/server/tables.R": {
-      "checksum": "83b0caeeeffd1cfe7717f8650303ecf8"
+      "checksum": "dc75141ef70ee1523ced0a49ad8861fa"
     },
     "modules/ui/intro_panel.R": {
-      "checksum": "55a54b90dd20d308a55e97ee754feae9"
+      "checksum": "53a2bb2c845f007f198343de0eaf9f4d"
+    },
+    "modules/ui/login_panel.R": {
+      "checksum": "bc2802dac05a65b94f61068bd77cc531"
     },
     "modules/ui/main_panel.R": {
       "checksum": "437b3ba5a3fad3bcf6a944f4cb5efbfd"
@@ -1916,7 +2039,7 @@
       "checksum": "de068fbec0131cfc8ccb77738b03624d"
     },
     "modules/ui/sidebar.R": {
-      "checksum": "3b587ea73000b9bed5621fbc53e2a3b0"
+      "checksum": "68ec46bdd564d1ae393b6e6225e8a370"
     },
     "README.md": {
       "checksum": "027239ca64521be790357d1143203f4c"
@@ -1925,13 +2048,13 @@
       "checksum": "3cff8568c63099fb32829906bdecc2d3"
     },
     "server_main.R": {
-      "checksum": "d8c13ddb68e941aa43b99c29109a90cb"
+      "checksum": "329c2d466ec638131b651a5171a96643"
     },
     "setup_and_data.R": {
-      "checksum": "6780e7889d077f6f73d163416ea03dbd"
+      "checksum": "d0c5e51366c49a451e4dcd43ff4ea0c9"
     },
     "ui_main.R": {
-      "checksum": "62b396401bf9d7ba2dbc25d66e55a257"
+      "checksum": "bcba19e7045447f74610af7e937bada1"
     },
     "www/eth_logo.png": {
       "checksum": "4108b8eeace37b94914462ac2431ff66"
@@ -1952,13 +2075,13 @@
       "checksum": "d0779b529dc567422fc8754904a802d3"
     },
     "www/matchmaking.js": {
-      "checksum": "1113e0fbe64dc355f089a17e8ca2a670"
+      "checksum": "f4ba60e332f99898617f744ed9372662"
     },
     "www/sidebar-resize.js": {
       "checksum": "b19082777b8d11c4a581516153acc77a"
     },
     "www/styles.css": {
-      "checksum": "648a7a046f0aece10a0c27ca6b39bd29"
+      "checksum": "50c20412cb0d52c62a46cd071bfc870d"
     }
   },
   "users": null

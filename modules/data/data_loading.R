@@ -28,7 +28,12 @@ read_public_submissions <- function(path = PUBLIC_DATA_FILE) {
   df
 }
 
+# Researcher submissions are currently not published: the researcher views stay
+# in place but show "Not available". Set to TRUE to bring them back.
+SHOW_RESEARCHERS <- FALSE
+
 SUBMISSIONS <- read_public_submissions()
+if (!SHOW_RESEARCHERS) SUBMISSIONS <- SUBMISSIONS[SUBMISSIONS$actor != ACTOR_RES, ]
 DATA_AS_OF  <- max(SUBMISSIONS$submitted, na.rm = TRUE)
 
 # Display string for the (multi-valued) country field

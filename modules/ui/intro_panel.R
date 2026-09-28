@@ -3,6 +3,8 @@
 # #about-page shell; page switching lives in www/matchmaking.js)
 # =============================================================================
 
+APPLICATION_FORM_URL <- "https://forms.cloud.microsoft/e/gA1rcxT6z4"
+
 about_section <- function(icon_name, title) {
   div(
     class = "about-section-header",
@@ -12,8 +14,7 @@ about_section <- function(icon_name, title) {
 }
 
 intro_panel_ui <- function() {
-  n_pp  <- sum(SUBMISSIONS$actor == ACTOR_PP)
-  n_res <- sum(SUBMISSIONS$actor == ACTOR_RES)
+  n_pp <- sum(SUBMISSIONS$actor == ACTOR_PP)
 
   div(
     class = "about-card",
@@ -38,23 +39,32 @@ intro_panel_ui <- function() {
     div(
       class = "about-stats",
       div(class = "about-stat pp", tags$strong(n_pp), tags$span("practice partner submissions")),
-      div(class = "about-stat res", tags$strong(n_res), tags$span("researcher submissions")),
       div(class = "about-stat", tags$strong(length(setdiff(ALL_COUNTRIES, NOT_SPECIFIED))),
           tags$span("focus countries"))
     ),
 
     about_section("compass", "How to Use"),
+    tags$p(class = "about-body-text",
+           "The dashboard has a panel on the left with the following filtering options:"),
     tags$ol(
       class = "about-body-list",
       tags$li(tags$strong("Country:"), " pick one or more focus countries (leave empty for all). ",
               "The numbers show practice partners · researchers per country."),
-      tags$li(tags$strong("Big topic:"), " the list narrows to the topics present in the chosen countries."),
-      tags$li(tags$strong("Actors:"), " show practice partners, researchers, or both."),
-      tags$li(tags$strong("Tables:"), " click any row to read the full submission ",
-              "(summary, rationale, envisioned role) and see potential matches."),
-      tags$li(tags$strong("Match overview:"), " a country × topic grid; highlighted cells have ",
-              "both a practice partner and a researcher. Click a cell to see who they are."),
-      tags$li(tags$strong("Download:"), " export the filtered tables to Excel.")
+      tags$li(tags$strong("Topic areas:"),
+              " the list narrows to the topics present in the chosen countries."),
+      tags$li(tags$strong("Practice partner / ETH Domain researcher toggle:"),
+              " filter for researchers at the ETH Domain or for practice partners.")
+    ),
+
+    about_section("user-graduate",
+                  "If you are an ETH Domain researcher looking for a potential partner"),
+    tags$ol(
+      class = "about-body-list",
+      tags$li("Fill in the ",
+              tags$a(class = "about-link", href = APPLICATION_FORM_URL, target = "_blank",
+                     rel = "noopener", "application form"), "."),
+      tags$li("Review the existing projects on the matchmaking dashboard ",
+              tags$span(class = "muted", "(login with an ETH Domain email address)."))
     ),
 
     about_section("database", "Data"),
@@ -68,7 +78,7 @@ intro_panel_ui <- function() {
       class = "about-body-text-muted",
       icon("lock"), " To protect submitters' privacy, names and contact details are not published ",
       "here, and personal details have been removed from the texts. ",
-      "To connect with a practice partner or researcher, please contact the programme team."
+      "To connect with a practice partner, please contact the programme team."
     ),
 
     tags$hr(class = "about-hr-bottom"),

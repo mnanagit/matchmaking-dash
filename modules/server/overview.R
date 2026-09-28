@@ -62,6 +62,7 @@ build_overview_table <- function(counts) {
 }
 
 output$overview_grid <- renderUI({
+  req(authed())
   counts <- count_country_topic(filtered_links())
   if (nrow(counts) == 0) {
     return(div(class = "empty-state", icon("filter-circle-xmark"),
@@ -92,6 +93,7 @@ pick_side <- function(subs, actor) {
 last_pick <- reactiveVal(NULL)
 
 observeEvent(input$overview_pick, {
+  req(authed())
   pick <- input$overview_pick
   req(pick$country, pick$topic)
 

@@ -6,6 +6,7 @@ source("setup_and_data.R")
 
 source("modules/ui/panel_helpers.R")
 source("modules/ui/intro_panel.R")
+source("modules/ui/login_panel.R")
 source("modules/ui/sidebar.R")
 source("modules/ui/main_panel.R")
 
@@ -15,10 +16,11 @@ versioned_asset <- function(file) {
 }
 
 # =============================================================================
-# Two separate pages, only one visible at a time (same pattern as the
+# Three separate pages, only one visible at a time (same pattern as the
 # mondial-dashboard template); switching is wired in www/matchmaking.js:
 #   #about-page    : shown on load
-#   #dashboard-page: shown when #enter-dashboard-btn is clicked
+#   #login-page    : shown when #enter-dashboard-btn is clicked before login
+#   #dashboard-page: shown once the ETH Domain login succeeded
 # =============================================================================
 
 ui <- fluidPage(
@@ -35,7 +37,10 @@ ui <- fluidPage(
   # PAGE 1: ABOUT
   div(id = "about-page", intro_panel_ui()),
 
-  # PAGE 2: DASHBOARD
+  # PAGE 2: LOGIN (ETH Domain email + one-time code)
+  div(id = "login-page", login_panel_ui()),
+
+  # PAGE 3: DASHBOARD
   div(
     id = "dashboard-page",
 

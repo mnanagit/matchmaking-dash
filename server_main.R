@@ -7,6 +7,9 @@
 
 server <- function(input, output, session) {
 
+  # ETH Domain login; defines authed(), which gates every data output
+  source("modules/server/auth.R", local = TRUE)
+
   # Country -> Topic -> Actor filters; defines filtered_uids() / filtered_links()
   source("modules/server/filters.R", local = TRUE)
 

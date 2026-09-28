@@ -1,5 +1,5 @@
 # =============================================================================
-# SERVER: FILTERS - Country -> Big topic -> Actors
+# SERVER: FILTERS - Country -> Topic areas -> Practice partner / researcher
 # =============================================================================
 # Defines (used by the other server modules):
 #   filtered_links()  ACTOR_LINKS rows matching all three filters
@@ -7,7 +7,9 @@
 #   apply_pair(country, topic)  set both filters at once (overview drill-down)
 # =============================================================================
 
+# Nothing is sent to the browser until the ETH Domain login succeeded
 filtered_links <- reactive({
+  req(authed())
   apply_filters(ACTOR_LINKS, input$f_country, input$f_topic, input$f_actor)
 })
 
@@ -22,7 +24,16 @@ filtered_subs <- reactive({
 # -----------------------------------------------------------------------------
 pending_topic <- reactiveVal(NULL)
 
+# The static sidebar lists bare names; submission counts are sent only after login
+observeEvent(authed(), once = TRUE, {
+  req(authed())
+  updatePickerInput(session, "f_country",
+                    choices = choice_labels(ACTOR_LINKS, "country", ALL_COUNTRIES))
+  updatePickerInput(session, "f_topic", choices = choice_labels(ACTOR_LINKS, "topic", ALL_TOPICS))
+})
+
 observeEvent(input$f_country, ignoreNULL = FALSE, ignoreInit = TRUE, {
+  req(authed())
   in_countries <- apply_filters(ACTOR_LINKS, countries = input$f_country)
   available <- sort_with_na_last(in_countries$topic)
 

@@ -10,3 +10,4 @@ source("modules/data/color_palettes.R")   # ACTOR_* constants used below
 source("modules/data/shared.R")
 source("modules/data/data_loading.R")
 source("modules/data/filter_helpers.R")
+source("modules/data/auth_helpers.R")     # ETH Domain email + one-time code login

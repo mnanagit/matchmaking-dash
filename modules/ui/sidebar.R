@@ -3,9 +3,15 @@
 # =============================================================================
 # Three connected filter levels (cascading logic in modules/server/filters.R):
 # 1. Country     (multi-select; empty = all)
-# 2. Big topic   (multi-select; choices narrow to the selected countries)
-# 3. Actors      (Practice partners / Researchers)
+# 2. Topic areas (multi-select; choices narrow to the selected countries)
+# 3. Practice partner / ETH Domain researcher toggle
 # =============================================================================
+
+# Display names on the actor toggle (values stay ACTOR_TYPES)
+ACTOR_TOGGLE_LABELS <- c(
+  "Practice partners" = "Practice partners",
+  "Researchers"       = "ETH Domain researchers"
+)
 
 #' Shared pickerInput options for the multi-select filters
 filter_picker_options <- function(none_text) {
@@ -37,37 +43,38 @@ sidebar_ui <- function() {
                    tags$span(class = "step-num", "1"), "Country"),
         pickerInput(
           "f_country", label = NULL,
-          choices = choice_labels(ACTOR_LINKS, "country", ALL_COUNTRIES),
+          choices = ALL_COUNTRIES,  # counts are added after login (filters.R)
           multiple = TRUE,
           options = filter_picker_options("All countries")
         )
       ),
 
       # =========================================================================
-      # 2. BIG TOPIC
+      # 2. TOPIC AREAS
       # =========================================================================
       div(
         class = "measure-wizard",
         tags$label(class = "sidebar-step-label", `for` = "f_topic",
-                   tags$span(class = "step-num", "2"), "Big topic"),
+                   tags$span(class = "step-num", "2"), "Topic areas"),
         pickerInput(
           "f_topic", label = NULL,
-          choices = choice_labels(ACTOR_LINKS, "topic", ALL_TOPICS),
+          choices = ALL_TOPICS,
           multiple = TRUE,
-          options = filter_picker_options("All topics")
+          options = filter_picker_options("All topic areas")
         )
       ),
 
       # =========================================================================
-      # 3. ACTORS
+      # 3. PRACTICE PARTNER / ETH DOMAIN RESEARCHER
       # =========================================================================
       div(
         class = "measure-wizard",
         tags$label(class = "sidebar-step-label",
-                   tags$span(class = "step-num", "3"), "Actors"),
+                   tags$span(class = "step-num", "3"),
+                   "Practice partner / ETH Domain researcher"),
         checkboxGroupButtons(
           "f_actor", label = NULL,
-          choiceNames = lapply(ACTOR_TYPES, function(a) tagList(icon(ACTOR_ICONS[[a]]), " ", a)),
+          choiceNames = lapply(ACTOR_TYPES, function(a) tagList(icon(ACTOR_ICONS[[a]]), " ", ACTOR_TOGGLE_LABELS[[a]])),
           choiceValues = ACTOR_TYPES,
           selected = ACTOR_TYPES,
           justified = TRUE,

@@ -17,6 +17,8 @@ clamp_html <- function(x) sprintf('<span class="mm-clamp" title="%s">%s</span>',
 
 topic_html <- function(x) sprintf('<span class="topic-chip">%s</span>', esc(x))
 
+NOT_AVAILABLE <- "Not available"
+
 # -----------------------------------------------------------------------------
 # KPI cards
 # -----------------------------------------------------------------------------
@@ -38,12 +40,14 @@ kpi_card <- function(value, label, icon_name, class = "") {
   )
 }
 
-#' "matching / total" label for one actor
+#' "matching / total" label for one actor ("Not available" for hidden researchers)
 actor_share_label <- function(subs, actor) {
+  if (actor == ACTOR_RES && !SHOW_RESEARCHERS) return(NOT_AVAILABLE)
   sprintf("%d / %d", sum(subs$actor == actor), sum(SUBMISSIONS$actor == actor))
 }
 
 output$kpi_cards <- renderUI({
+  req(authed())
   subs  <- filtered_subs()
   links <- filtered_links()
   div(
@@ -65,11 +69,12 @@ pp_data  <- reactive(filtered_subs()[filtered_subs()$actor == ACTOR_PP, ])
 res_data <- reactive(filtered_subs()[filtered_subs()$actor == ACTOR_RES, ])
 
 #' Render a submissions table with shared DT options
-#' @param df Display data frame (HTML-escaped cells)
-#' @param df Display data frame; its first column must be `uid` (hidden, read
-#'   by www/matchmaking.js on row click to open the details modal)
+#' @param df Display data frame (HTML-escaped cells); its first column must be
+#'   `uid` (hidden, read by www/matchmaking.js on row click to open the details modal)
 #' @param wide_cols 0-based indices of the long-text columns
-submissions_dt <- function(df, wide_cols) {
+#' @param empty_text Message shown when the table has no rows
+submissions_dt <- function(df, wide_cols,
+                           empty_text = "No submissions match the current filters.") {
   datatable(
     df,
     escape = FALSE,
@@ -83,7 +88,7 @@ submissions_dt <- function(df, wide_cols) {
       autoWidth = FALSE,
       dom = "<'dt-top'f>t<'dt-bottom'lip>",
       language = list(search = "", searchPlaceholder = "Search in table…",
-                      emptyTable = "No submissions match the current filters."),
+                      emptyTable = empty_text),
       columnDefs = list(
         list(visible = FALSE, searchable = FALSE, targets = 0),
         list(width = "260px", targets = wide_cols)
@@ -122,7 +127,8 @@ output$res_table <- renderDT({
       Keywords        = clamp_html(d$keywords),
       check.names = FALSE
     ),
-    wide_cols = c(5, 6)
+    wide_cols = c(5, 6),
+    empty_text = if (SHOW_RESEARCHERS) "No submissions match the current filters." else NOT_AVAILABLE
   )
 })
 
@@ -210,6 +216,7 @@ details_modal <- function(sub) {
 
 # Row clicks arrive from www/matchmaking.js as input$row_click = uid
 observeEvent(input$row_click, {
+  req(authed())
   sub <- SUBMISSIONS[SUBMISSIONS$uid == input$row_click, ]
   req(nrow(sub) == 1)
   showModal(details_modal(sub))
