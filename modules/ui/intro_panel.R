@@ -66,9 +66,8 @@ intro_panel_ui <- function() {
     ),
     tags$p(
       class = "about-body-text-muted",
-      icon("lock"), " To protect submitters' privacy, names and contact details are not published ",
-      "here, and personal details have been removed from the texts. ",
-      "To connect with a practice partner or researcher, please contact the programme team."
+      icon("lock"), " This dashboard contains submitters' names and contact details. ",
+      "It is for internal use by the programme team only: do not share screenshots or exports."
     ),
 
     tags$hr(class = "about-hr-bottom"),

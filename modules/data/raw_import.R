@@ -1,16 +1,15 @@
 # =============================================================================
 # RAW IMPORT - Parse the two MS Forms .xlsx exports in Data/ (LOCAL ONLY)
 # =============================================================================
-# Used only by scripts/anonymise_data.R. The app never sources this file: it
-# reads the anonymised data_public/submissions.csv. The raw exports contain
-# personal data (names, emails, LinkedIn) and must stay out of git.
+# Sourced by setup_and_data.R. The raw exports contain personal data (names,
+# emails, LinkedIn) and must stay out of git.
 #
 #   - Practice partner export: "...Submit your project idea (<date>).xlsx"
 #   - Researcher export:       "...Submit your project idea (For researchers)...xlsx"
 # The newest file of each kind is used.
 # =============================================================================
 
-RAW_DATA_DIR <- "Data"
+RAW_DATA_DIR <- Sys.getenv("MATCHMAKING_DATA_DIR", "Data")
 
 # -----------------------------------------------------------------------------
 # File discovery / reading

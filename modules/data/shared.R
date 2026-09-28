@@ -1,9 +1,6 @@
 # =============================================================================
-# SHARED - Constants/helpers used by both the app (data_loading.R) and the
-# local anonymisation script (raw_import.R, scripts/anonymise_data.R)
+# SHARED - Constants/helpers used by raw_import.R and data_loading.R
 # =============================================================================
-
-PUBLIC_DATA_FILE <- file.path("data_public", "submissions.csv")
 
 NOT_SPECIFIED <- "Not specified"
 UKRAINE       <- "Ukraine"

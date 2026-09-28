@@ -1,5 +1,6 @@
 # RAW DATA (personal contact data) - NEVER UPLOAD
-# The originals stay local in Data/; only the anonymised data_public/ is tracked.
+# The originals stay local in Data/. The anonymised, deployable copy lives on
+# the `momo` branch (data_public/submissions.csv).
 /Data/
 /data_cache/
 /Archive/
@@ -8,7 +9,6 @@
 *.rds
 *.RData
 *.csv
-!data_public/submissions.csv
 
 # R specific
 .Rproj.user

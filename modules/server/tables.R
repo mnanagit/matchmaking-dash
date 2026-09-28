@@ -98,6 +98,7 @@ output$pp_table <- renderDT({
     data.frame(
       uid             = d$uid,
       Organisation    = link_html(d$name, d$website),
+      Contact         = esc(d$contact),
       Type            = esc(d$category),
       Countries       = esc(d$country_label),
       Topic           = topic_html(d$topic),
@@ -105,7 +106,7 @@ output$pp_table <- renderDT({
       Keywords        = clamp_html(d$keywords),
       check.names = FALSE
     ),
-    wide_cols = c(5, 6)
+    wide_cols = c(6, 7)
   )
 })
 
@@ -114,6 +115,7 @@ output$res_table <- renderDT({
   submissions_dt(
     data.frame(
       uid             = d$uid,
+      Name            = link_html(d$name, d$website),
       Institution     = esc(d$institution),
       Position        = esc(d$category),
       Countries       = esc(d$country_label),
@@ -122,7 +124,7 @@ output$res_table <- renderDT({
       Keywords        = clamp_html(d$keywords),
       check.names = FALSE
     ),
-    wide_cols = c(5, 6)
+    wide_cols = c(6, 7)
   )
 })
 
@@ -157,6 +159,10 @@ optional_link <- function(url, text) {
   if (is.na(url)) NULL else tags$a(href = url, target = "_blank", rel = "noopener", text)
 }
 
+mail_link <- function(email) {
+  if (is.na(email)) NULL else tags$a(href = paste0("mailto:", email), email)
+}
+
 matches_list <- function(matches) {
   if (nrow(matches) == 0) return(tags$p(class = "muted", "None yet."))
   tags$ul(lapply(seq_len(nrow(matches)), function(i) {
@@ -187,8 +193,13 @@ details_modal <- function(sub) {
       if (!is_pp) detail_field("Institution", sub$institution),
       detail_field("Focus countries", sub$country_label),
       detail_field("Big topic", sub$topic),
-      if (is_pp) detail_field("Website", optional_link(sub$website, "Organisation website")),
+      if (is_pp) detail_field("Contact person", sub$contact),
+      detail_field("Email", mail_link(sub$email)),
+      if (is_pp) detail_field("LinkedIn", optional_link(sub$linkedin, "LinkedIn profile")),
+      detail_field("Website", optional_link(sub$website,
+                                            if (is_pp) "Organisation website" else "Chair / group webpage")),
       detail_field("Partner already identified", sub$partner_identified),
+      if (!is.na(sub$partner_named)) detail_field("Partner named", sub$partner_named),
       detail_field("Submitted", format(sub$submitted, "%d %b %Y"))
     ),
 

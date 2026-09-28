@@ -1,8 +1,9 @@
 # =============================================================================
-# DATA LOADING - Read the anonymised submissions (data_public/submissions.csv)
+# DATA LOADING - Read the raw MS Forms exports in Data/ (via raw_import.R)
 # =============================================================================
-# The CSV is produced locally by scripts/anonymise_data.R from the raw exports
-# in Data/ (which never leave this machine). It holds no contact details.
+# Contains personal contact data: this app runs locally only. A successful read
+# is cached to data_cache/submissions.rds, which is used when a source .xlsx is
+# locked (open in Excel / OneDrive syncing) or missing.
 #
 # Outputs (globals used by the UI and server):
 #   SUBMISSIONS   one row per submission, both actors
@@ -10,26 +11,26 @@
 #   ALL_COUNTRIES, ALL_TOPICS, DATA_AS_OF
 # =============================================================================
 
-#' Read the public CSV and restore types (countries back to a list-column)
-#' @param path Path to the anonymised CSV
-#' @return A tibble in the shape the app expects
-read_public_submissions <- function(path = PUBLIC_DATA_FILE) {
-  if (!file.exists(path)) {
-    stop(sprintf("'%s' not found. Run scripts/anonymise_data.R to create it.", path),
-         call. = FALSE)
+DATA_CACHE_FILE <- file.path("data_cache", "submissions.rds")
+
+#' Read the raw exports, falling back to the last cached copy
+#' @param cache_file Path to the .rds cache
+#' @return list(submissions, as_of)
+load_submissions <- function(cache_file = DATA_CACHE_FILE) {
+  raw <- tryCatch(load_raw_submissions(), error = function(e) e)
+  if (!inherits(raw, "error")) {
+    dir.create(dirname(cache_file), recursive = TRUE, showWarnings = FALSE)
+    saveRDS(raw[c("submissions", "as_of")], cache_file)
+    return(raw)
   }
-  df <- utils::read.csv(path, encoding = "UTF-8", fileEncoding = "UTF-8",
-                        stringsAsFactors = FALSE, na.strings = "", check.names = FALSE)
-  df <- tibble::as_tibble(df)
-  df$ukraine   <- as.logical(df$ukraine)
-  df$submitted <- as.Date(df$submitted)
-  df$countries <- lapply(df$countries, split_multi)
-  df$countries[lengths(df$countries) == 0] <- list(NOT_SPECIFIED)
-  df
+  if (!file.exists(cache_file)) stop(conditionMessage(raw), call. = FALSE)
+  message("Using cached data (", conditionMessage(raw), ")")
+  readRDS(cache_file)
 }
 
-SUBMISSIONS <- read_public_submissions()
-DATA_AS_OF  <- max(SUBMISSIONS$submitted, na.rm = TRUE)
+LOADED      <- load_submissions()
+SUBMISSIONS <- LOADED$submissions
+DATA_AS_OF  <- LOADED$as_of
 
 # Display string for the (multi-valued) country field
 SUBMISSIONS$country_label <- vapply(SUBMISSIONS$countries, paste, character(1), collapse = ", ")
