@@ -1985,10 +1985,10 @@
       "checksum": "cb0b3d7ce191e921ce32f6b04909a4b2"
     },
     "data_public/README.md": {
-      "checksum": "2e96a8076e76d6fbc223ced2d6abad71"
+      "checksum": "8fb30a8bbe9f5ced8c325c05c05bb83c"
     },
     "data_public/submissions.csv": {
-      "checksum": "d01a067e53bf8f88b3a53f5d1c5292d6"
+      "checksum": "d012d0f83958f78e922ecdd45e89e49a"
     },
     "modules/data/auth_helpers.R": {
       "checksum": "92884a1ca9f09d7a68435b829c3c88be"
@@ -2006,7 +2006,7 @@
       "checksum": "cfe1e5ff6d140e89d771aa20ccebd6c8"
     },
     "modules/data/raw_import.R": {
-      "checksum": "58e75cedc8b31b7bd9ac209d200c15b8"
+      "checksum": "f6541eafc1a62c5338680df0378a7854"
     },
     "modules/data/shared.R": {
       "checksum": "8684bfed8138403d24e1347421b36a64"
@@ -2045,7 +2045,7 @@
       "checksum": "027239ca64521be790357d1143203f4c"
     },
     "scripts/anonymise_data.R": {
-      "checksum": "3cff8568c63099fb32829906bdecc2d3"
+      "checksum": "e8c2b60343ba1966ba97337ac02f1de2"
     },
     "server_main.R": {
       "checksum": "329c2d466ec638131b651a5171a96643"

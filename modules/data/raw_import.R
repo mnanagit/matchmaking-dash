@@ -119,7 +119,7 @@ clean_partners <- function(df) {
       website     = as_url(col_by_prefix(df, "^Link to website")),
       linkedin    = as_url(col_by_prefix(df, "^LinkedIn"))
     ),
-    common_fields(df, "^What role do you envision")
+    common_fields(df, "^What (role|value) do you envision")  # form reworded "role" -> "value"
   )
 }
 

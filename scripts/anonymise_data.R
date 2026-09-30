@@ -52,7 +52,7 @@ GENERIC_TOKENS <- c("mr", "mrs", "ms", "miss", "dr", "prof", "professor", "phd",
 #' @return list(text, n)
 replace_count <- function(text, pattern, perl = FALSE, ignore_case = TRUE) {
   hits <- gregexpr(pattern, text, perl = perl, ignore.case = ignore_case)
-  n <- sum(vapply(hits, function(h) sum(h > 0), integer(1)))
+  n <- sum(vapply(hits, function(h) sum(h > 0, na.rm = TRUE), integer(1)))
   list(text = gsub(pattern, REDACTED, text, perl = perl, ignore.case = ignore_case), n = n)
 }
 
