@@ -120,8 +120,9 @@ build_otp_email <- function(to, code, from = Sys.getenv("SMTP_FROM")) {
     "\r\n",
     "Your login code for the Innovative Cities & Infrastructure Programme ",
     "Matchmaking Dashboard is:\r\n\r\n    ", code, "\r\n\r\n",
-    "It is valid for ", OTP_TTL_MIN, " minutes. ",
-    "If you did not request it, you can ignore this email.\r\n"
+    "It is valid for ", OTP_TTL_MIN, " minutes.\r\n\r\n",
+    "If you didn't request this, please ignore this email. ",
+    "Your account remains secure and no changes have been made.\r\n"
   )
 }
 
