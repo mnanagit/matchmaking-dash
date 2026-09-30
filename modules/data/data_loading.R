@@ -29,7 +29,7 @@ read_public_submissions <- function(path = PUBLIC_DATA_FILE) {
 }
 
 # Researcher submissions are currently not published: the researcher views stay
-# in place but show "Not available". Set to TRUE to bring them back.
+# in place but show "N/A". Set to TRUE to bring them back.
 SHOW_RESEARCHERS <- FALSE
 
 SUBMISSIONS <- read_public_submissions()

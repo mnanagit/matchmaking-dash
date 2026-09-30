@@ -17,7 +17,7 @@ clamp_html <- function(x) sprintf('<span class="mm-clamp" title="%s">%s</span>',
 
 topic_html <- function(x) sprintf('<span class="topic-chip">%s</span>', esc(x))
 
-NOT_AVAILABLE <- "Not available"
+NOT_AVAILABLE <- "N/A"
 
 # -----------------------------------------------------------------------------
 # KPI cards
@@ -40,7 +40,7 @@ kpi_card <- function(value, label, icon_name, class = "") {
   )
 }
 
-#' "matching / total" label for one actor ("Not available" for hidden researchers)
+#' "matching / total" label for one actor ("N/A" for hidden researchers)
 actor_share_label <- function(subs, actor) {
   if (actor == ACTOR_RES && !SHOW_RESEARCHERS) return(NOT_AVAILABLE)
   sprintf("%d / %d", sum(subs$actor == actor), sum(SUBMISSIONS$actor == actor))

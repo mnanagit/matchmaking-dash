@@ -1997,7 +1997,7 @@
       "checksum": "3a333b09560a3c6747ee4b3f7217e8d9"
     },
     "modules/data/data_loading.R": {
-      "checksum": "eed842a0d6da694f363a9cf824aa0a27"
+      "checksum": "e193af9a20adae3db331b9a9f8c85c7d"
     },
     "modules/data/filter_helpers.R": {
       "checksum": "2e49455c1efa995323d3fdef22a3de3d"
@@ -2024,7 +2024,7 @@
       "checksum": "31ec6f0c68ea56d1551eb376cefc2935"
     },
     "modules/server/tables.R": {
-      "checksum": "dc75141ef70ee1523ced0a49ad8861fa"
+      "checksum": "3397316f11bfdedbac5fd62da13eee61"
     },
     "modules/ui/intro_panel.R": {
       "checksum": "53a2bb2c845f007f198343de0eaf9f4d"
