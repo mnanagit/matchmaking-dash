@@ -4,6 +4,7 @@
 # =============================================================================
 
 APPLICATION_FORM_URL <- "https://forms.cloud.microsoft/e/gA1rcxT6z4"
+CONTACT_EMAIL        <- "churchill.agutu@nadel.ethz.ch"
 
 about_section <- function(icon_name, title) {
   div(
@@ -67,18 +68,28 @@ intro_panel_ui <- function() {
               tags$span(class = "muted", "(login with an ETH Domain email address)."))
     ),
 
-    about_section("database", "Data"),
-    tags$p(
-      class = "about-body-text-muted",
-      "Submissions from the programme's online registration forms. Ukraine-track submissions ",
-      "use the Ukraine thematic focus list; all topics are merged into one list here. ",
-      "Data last updated: ", tags$strong(format(DATA_AS_OF, "%d %B %Y")), "."
-    ),
-    tags$p(
-      class = "about-body-text-muted",
-      icon("lock"), " To protect submitters' privacy, names and contact details are not published ",
-      "here, and personal details have been removed from the texts. ",
-      "To connect with a practice partner, please contact the programme team."
+    about_section("circle-info", "Please Note:"),
+    tags$p(class = "about-body-text",
+           "Date last updated: ", tags$strong(format(DATA_AS_OF, "%d %B %Y"))),
+    tags$ul(
+      class = "about-body-list",
+      tags$li("This dashboard contains project ideas submitted by practice partners to the ",
+              "ETH4D Innovative Cities & Infrastructure call."),
+      tags$li("Take a look at the practice partner matchmaking dashboard for more information, ",
+              "and reach out to make the connection if you find a project of interest.",
+              tags$br(),
+              tags$a(class = "about-link", href = paste0("mailto:", CONTACT_EMAIL), CONTACT_EMAIL)),
+      tags$li("These project ideas are online submissions and have not been vetted by ETH4D. ",
+              "Before starting a collaboration, researchers should check directly with the ",
+              "submitting organisation that the project meets all call eligibility requirements, ",
+              "including the evaluation criteria and the definition of a local non-academic ",
+              "practice partner."),
+      tags$li("This overview is only meant to give you a sense of the project ideas submitted."),
+      tags$li("For further information about the INCI programme or the ETHZ Urban Research Grant, ",
+              "please refer to the Innovative Cities & Infrastructure Programme website and the ",
+              "Call for Proposals Guidelines."),
+      tags$li("This dashboard is a service offered for ETH4D and is not a formal part of the ",
+              "application process for ETH Zurich Urban Grants.")
     ),
 
     tags$hr(class = "about-hr-bottom"),
