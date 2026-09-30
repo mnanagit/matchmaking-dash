@@ -15,6 +15,12 @@ link_html <- function(text, url) {
 #' Two-line clamp with the full text as tooltip
 clamp_html <- function(x) sprintf('<span class="mm-clamp" title="%s">%s</span>', esc(x), esc(x))
 
+#' Project title styled as a link to show the row opens the details. A span, not
+#' an <a>: www/matchmaking.js ignores clicks on links so they keep their own action.
+title_link_html <- function(x) {
+  sprintf('<span class="mm-clamp mm-title-link" title="%s">%s</span>', esc(x), esc(x))
+}
+
 topic_html <- function(x) sprintf('<span class="topic-chip">%s</span>', esc(x))
 
 NOT_AVAILABLE <- "N/A"
@@ -102,15 +108,15 @@ output$pp_table <- renderDT({
   submissions_dt(
     data.frame(
       uid             = d$uid,
+      `Project title` = title_link_html(d$title),
       Organisation    = link_html(d$name, d$website),
       Type            = esc(d$category),
       Countries       = esc(d$country_label),
       Topic           = topic_html(d$topic),
-      `Project title` = clamp_html(d$title),
       Keywords        = clamp_html(d$keywords),
       check.names = FALSE
     ),
-    wide_cols = c(5, 6)
+    wide_cols = c(1, 6)
   )
 })
 
@@ -119,15 +125,15 @@ output$res_table <- renderDT({
   submissions_dt(
     data.frame(
       uid             = d$uid,
+      `Project title` = title_link_html(d$title),
       Institution     = esc(d$institution),
       Position        = esc(d$category),
       Countries       = esc(d$country_label),
       Topic           = topic_html(d$topic),
-      `Project title` = clamp_html(d$title),
       Keywords        = clamp_html(d$keywords),
       check.names = FALSE
     ),
-    wide_cols = c(5, 6),
+    wide_cols = c(1, 6),
     empty_text = if (SHOW_RESEARCHERS) "No submissions match the current filters." else NOT_AVAILABLE
   )
 })

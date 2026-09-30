@@ -2024,7 +2024,7 @@
       "checksum": "31ec6f0c68ea56d1551eb376cefc2935"
     },
     "modules/server/tables.R": {
-      "checksum": "3397316f11bfdedbac5fd62da13eee61"
+      "checksum": "a5c71280d3a137893e5f771d5514f700"
     },
     "modules/ui/intro_panel.R": {
       "checksum": "a67338a12dd88d694fa7174f8ae461f1"
@@ -2081,7 +2081,7 @@
       "checksum": "b19082777b8d11c4a581516153acc77a"
     },
     "www/styles.css": {
-      "checksum": "50c20412cb0d52c62a46cd071bfc870d"
+      "checksum": "26a5ff580e1011a4d2bfaaba21897136"
     }
   },
   "users": null
