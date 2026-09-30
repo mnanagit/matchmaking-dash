@@ -2012,7 +2012,7 @@
       "checksum": "8684bfed8138403d24e1347421b36a64"
     },
     "modules/server/auth.R": {
-      "checksum": "c2fb11272e1480f49b37d57ba7de80fc"
+      "checksum": "c35d86b05ab6f61a108d6e3ce8abb37a"
     },
     "modules/server/downloads.R": {
       "checksum": "1eb56c84bda37d679120ab4b8f0a7869"
@@ -2030,7 +2030,7 @@
       "checksum": "a67338a12dd88d694fa7174f8ae461f1"
     },
     "modules/ui/login_panel.R": {
-      "checksum": "bc2802dac05a65b94f61068bd77cc531"
+      "checksum": "fafe503d1aac11f6aa6c49ff84d4016e"
     },
     "modules/ui/main_panel.R": {
       "checksum": "437b3ba5a3fad3bcf6a944f4cb5efbfd"

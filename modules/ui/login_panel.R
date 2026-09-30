@@ -21,12 +21,17 @@ login_panel_ui <- function() {
       "email address and we will send you a one-time login code."
     ),
     tags$p(class = "login-domains", paste0("@", ETH_DOMAINS, collapse = "  ·  ")),
+    tags$p(
+      class = "about-body-text-muted",
+      icon("circle-info"), " Use your official address without a department or lab ",
+      "subdomain, e.g. ", tags$strong("HTanu@epfl.ch"), ", not HTanu@lab.epfl.ch."
+    ),
 
     # Step A: email
     div(
       id = "login-step-email",
       class = "login-step",
-      textInput("login_email", "Email address", placeholder = "name@ethz.ch", width = "100%"),
+      textInput("login_email", "Email address", placeholder = "HTanu@epfl.ch", width = "100%"),
       actionButton("login_send", "Send code", class = "btn-primary")
     ),
 

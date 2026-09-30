@@ -32,7 +32,8 @@ output$login_status <- renderUI({
 request_code <- function(email) {
   if (!is_eth_domain_email(email)) {
     return(set_login_msg("error", "Please use an ETH Domain address ending in ",
-                         paste0("@", ETH_DOMAINS, collapse = ", "), "."))
+                         paste0("@", ETH_DOMAINS, collapse = ", "),
+                         " (no subdomains such as lab.epfl.ch)."))
   }
   if (otp_delivery_mode() == "none") {
     return(set_login_msg("error", "Login is not configured yet. Please contact the programme team."))
