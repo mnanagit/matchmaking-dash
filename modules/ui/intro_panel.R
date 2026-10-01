@@ -65,7 +65,9 @@ intro_panel_ui <- function() {
               tags$a(class = "about-link", href = APPLICATION_FORM_URL, target = "_blank",
                      rel = "noopener", "application form"), "."),
       tags$li("Review the existing projects on the matchmaking dashboard ",
-              tags$span(class = "muted", "(login with an ETH Domain email address)."))
+              tags$span(class = "muted", "(login with an ETH Domain email address)."),
+              " A one-time login code is sent to you by email (valid for ", OTP_TTL_MIN,
+              " minutes). ", tags$strong("Please check your spam folder as well."))
     ),
 
     about_section("circle-info", "Please Note:"),

@@ -20,6 +20,11 @@ suppressMessages({
 })
 
 REDACTED <- "[removed]"
+# Test submissions made while setting up the form; never published.
+# uid is the row position in the export, so the guard below checks that these
+# rows still predate the first real submission before dropping them.
+EXCLUDED_UIDS <- paste0("PP-", 1L:5L)
+TEST_PERIOD_END <- as.Date("2026-07-23")
 FREE_TEXT_COLS <- c("title", "summary", "keywords", "rationale", "role")
 
 EMAIL_RE  <- "[[:alnum:]._%+-]+@[[:alnum:].-]+\\.[[:alpha:]]{2,}"
@@ -105,6 +110,13 @@ scrub_text <- function(text, name_re) {
 # -----------------------------------------------------------------------------
 raw <- load_raw_submissions()
 subs <- raw$submissions
+is_excluded <- subs$uid %in% EXCLUDED_UIDS
+if (sum(is_excluded) != length(EXCLUDED_UIDS) ||
+    !isTRUE(all(as.Date(subs$submitted[is_excluded]) < TEST_PERIOD_END))) {
+  stop("EXCLUDED_UIDS no longer point at the test submissions (export layout changed); ",
+       "update them in scripts/anonymise_data.R.")
+}
+subs <- subs[!is_excluded, ]
 vocabulary <- c(subs$category, subs$topic, subs$institution, unlist(subs$countries),
                 ACTOR_TYPES)
 name_re <- tokens_regex(name_tokens(c(subs$contact, subs$name[subs$actor == ACTOR_RES]),
