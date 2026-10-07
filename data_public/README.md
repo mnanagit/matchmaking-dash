@@ -5,7 +5,7 @@ submissions. This is the only data the dashboard reads and the only data in git.
 
 - Generated: 2026-10-06 by `scripts/anonymise_data.R`
 - Source exports dated: 2026-10-06
-- Rows: 73 practice partners, 4 researchers
+- Rows: 71 practice partners, 4 researchers
 
 Removed: contact names, emails, LinkedIn profiles, researcher names and webpages,
 named identified partners, submission timestamps.

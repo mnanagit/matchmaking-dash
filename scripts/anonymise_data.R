@@ -26,6 +26,13 @@ REDACTED <- "[removed]"
 EXCLUDED_UIDS <- paste0("PP-", 1L:5L)
 TEST_PERIOD_END <- as.Date("2026-07-23")
 FREE_TEXT_COLS <- c("title", "summary", "keywords", "rationale", "role")
+# Keyboard-mash submissions ("aa", "vxcv") are dropped automatically: a text is
+# junk when it has too few letters, too few distinct letters or no vowel, and a
+# row is dropped when at least JUNK_MIN_FIELDS of JUNK_FIELDS are junk.
+JUNK_FIELDS       <- c("title", "name", "summary", "keywords")
+JUNK_MIN_FIELDS   <- 3L
+JUNK_MIN_LETTERS  <- 5L
+JUNK_MIN_DISTINCT <- 3L
 
 EMAIL_RE  <- "[[:alnum:]._%+-]+@[[:alnum:].-]+\\.[[:alpha:]]{2,}"
 URL_RE    <- paste0("(https?://|www\\.)[^[:space:]]+|",
@@ -94,6 +101,19 @@ tokens_regex <- function(tokens) {
   paste0("(?<!\\p{L})(", paste(escaped, collapse = "|"), ")(?!\\p{L})")
 }
 
+#' TRUE where a text is too short or unvaried to be a real answer
+is_junk_text <- function(text) {
+  letters_only <- tolower(gsub("[^[:alpha:]]", "", ifelse(is.na(text), "", text)))
+  n_distinct <- vapply(strsplit(letters_only, ""), function(ch) length(unique(ch)), integer(1))
+  nchar(letters_only) < JUNK_MIN_LETTERS | n_distinct < JUNK_MIN_DISTINCT |
+    !grepl("[aeiouy]", letters_only)
+}
+
+#' TRUE for rows where most identifying fields are junk (test / spam submissions)
+is_junk_row <- function(df) {
+  rowSums(vapply(df[JUNK_FIELDS], is_junk_text, logical(nrow(df)))) >= JUNK_MIN_FIELDS
+}
+
 #' Apply all scrubbing rules to one text vector; returns list(text, counts)
 scrub_text <- function(text, name_re) {
   counts <- c(email = 0L, url = 0L, phone = 0L, name = 0L)
@@ -117,6 +137,8 @@ if (sum(is_excluded) != length(EXCLUDED_UIDS) ||
        "update them in scripts/anonymise_data.R.")
 }
 subs <- subs[!is_excluded, ]
+is_junk <- is_junk_row(subs)
+subs <- subs[!is_junk, ]
 vocabulary <- c(subs$category, subs$topic, subs$institution, unlist(subs$countries),
                 ACTOR_TYPES)
 name_re <- tokens_regex(name_tokens(c(subs$contact, subs$name[subs$actor == ACTOR_RES]),
@@ -187,6 +209,8 @@ writeLines(c(
 
 message(sprintf("Wrote %s: %d practice partners, %d researchers.", PUBLIC_DATA_FILE,
                 sum(public$actor == ACTOR_PP), sum(public$actor == ACTOR_RES)))
+message(sprintf("Junk submissions dropped: %d (%s)", sum(is_junk),
+                paste(raw$submissions$uid[!is_excluded][is_junk], collapse = ", ")))
 message("Replacements in free text: ", paste(names(totals), totals, sep = "=", collapse = ", "))
 message(sprintf("Personal websites dropped: %d", sum(personal_site)))
 message("Residual checks passed (0 emails, 0 LinkedIn, 0 submitter names in texts/websites).")
